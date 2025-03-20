@@ -1,0 +1,6 @@
+@TimeCalculator_HostAddress = http://localhost:5219
+
+GET {{TimeCalculator_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
