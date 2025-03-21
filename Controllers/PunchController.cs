@@ -40,12 +40,31 @@ namespace TimeCalculator.Controllers
                 }
             }
 
-           
-            TimeSpan targetWorkTime = TimeSpan.FromHours(8);
-            TimeSpan remainingTime = targetWorkTime - totalWorked;
+            var lastPunchOut = punchTimes[punchTimes.Count - 1].PunchOut;
 
-            
-            DateTime completionTime = DateTime.Now.Add(remainingTime);
+            string? output = null;
+
+            TimeSpan targetWorkTime = TimeSpan.FromHours(8);
+
+            if(totalWorked >= targetWorkTime && lastPunchOut != null)
+            {
+                var workDifference = totalWorked - targetWorkTime;              
+                var completedTime = Convert.ToDateTime(lastPunchOut) - workDifference;
+                output = $"You have completed 8 hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")} and you have {Math.Round(workDifference.TotalMinutes, 2)} minutes as extra time";
+            }
+            else if(totalWorked <= targetWorkTime && lastPunchOut != null)
+            {
+                var workDifference = targetWorkTime - totalWorked;
+                var completedTime = Convert.ToDateTime(lastPunchOut) + workDifference;
+                output = $"You are {Math.Round(workDifference.TotalMinutes, 2)} minutes deficit for attaining 8 hours You could have been attain 8 hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")}";
+            }
+            else if(lastPunchOut == null)
+            {
+                TimeSpan remainingTime = targetWorkTime - totalWorked;
+                DateTime completionTime = DateTime.Now.Add(remainingTime);
+                output = $"You will attain 8 hours at {completionTime.ToString("dd-MM-yyyy hh:mm:ss tt")}";
+            }
+              
 
             
             var result = new
@@ -55,7 +74,7 @@ namespace TimeCalculator.Controllers
                 message = "Punchin time",
                 data = new
                 {                   
-                    CompletionTime = $"You will complete 8 hours at {completionTime.ToString("hh:mm:ss tt")}"  
+                    CompletionTime = output
                 }
             };
 
