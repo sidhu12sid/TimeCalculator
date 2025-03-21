@@ -31,12 +31,12 @@ namespace TimeCalculator.Controllers
             {
                 if (punchTime.PunchOut.HasValue)
                 {
-                    totalWorked += punchTime.PunchOut.Value.ToUniversalTime() - punchTime.PunchIn.ToUniversalTime();
+                    totalWorked += punchTime.PunchOut.Value - punchTime.PunchIn;
                 }
                 else
                 {
                    
-                    totalWorked += DateTime.UtcNow - punchTime.PunchIn.ToUniversalTime();
+                    totalWorked += DateTime.Now - punchTime.PunchIn;
                 }
             }
 
@@ -45,18 +45,17 @@ namespace TimeCalculator.Controllers
             TimeSpan remainingTime = targetWorkTime - totalWorked;
 
             
-            DateTime completionTime = DateTime.UtcNow.Add(remainingTime);
+            DateTime completionTime = DateTime.Now.Add(remainingTime);
 
+            
             var result = new
             {
                 error = false,
                 status = true,
                 message = "Punchin time",
                 data = new
-                {
-                    TotalTimeWorked = totalWorked,
-                    RemainingTime = remainingTime,
-                    CompletionTime = completionTime.ToString("hh:mm:ss tt")
+                {                   
+                    CompletionTime = $"You will complete 8 hours at {completionTime.ToString("hh:mm:ss tt")}"  
                 }
             };
 
