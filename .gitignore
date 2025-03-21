@@ -1,0 +1,121 @@
+# Ignore build artifacts
+[Bb]in/
+[Oo]bj/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userprefs
+*.lock.json
+
+# Ignore IDE-specific files
+.vs/
+.idea/
+*.swp
+*.swo
+
+# Ignore NuGet packages and restore files
+.nuget/
+packages/
+NuGet.exe
+nuget.exe
+*.nupkg
+*.nuspec
+
+# Ignore local development files
+*.local
+
+# Ignore test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Ignore ReSharper files
+_ReSharper.*
+*.ReSharper
+*.DotSettings.user
+
+# Ignore Azure Functions local settings
+local.settings.json
+
+# Ignore Rider-specific files
+.idea/
+*.sln.iml
+
+# Ignore Visual Studio Code files
+.vscode/
+
+# Ignore macOS files
+.DS_Store
+
+# Ignore logs and diagnostics
+logs/
+*.log
+*.log.*
+*.pid
+
+# Ignore output files
+out/
+dist/
+
+# Ignore Azure Functions artifacts
+bin/
+obj/
+func-artifacts/
+
+# Ignore Node.js files (if applicable)
+node_modules/
+npm-debug.log
+
+# Ignore JetBrains Rider cache
+.idea/
+
+# Ignore Visual Studio cache/options directory
+.vs/
+
+# Ignore MSBuild output files
+*.msbuild
+*.msbuild.bin
+
+# Ignore SQL Server files
+*.mdf
+*.ldf
+
+# Ignore Python files (if applicable)
+__pycache__/
+*.pyc
+
+# Ignore Docker files (if applicable)
+docker-compose.yml
+docker-compose.override.yml
+Dockerfile
+.dockerignore
+
+# Ignore Rider-specific files
+*.sln.iml
+
+# Ignore local development files
+*.local
+
+# Ignore JetBrains Rider cache
+.idea/
+
+# Ignore Visual Studio cache/options directory
+.vs/
+
+# Ignore MSBuild output files
+*.msbuild
+*.msbuild.bin
+
+# Ignore SQL Server files
+*.mdf
+*.ldf
+
+# Ignore Python files (if applicable)
+__pycache__/
+*.pyc
+
+# Ignore Docker files (if applicable)
+docker-compose.yml
+docker-compose.override.yml
+Dockerfile
+.dockerignore
