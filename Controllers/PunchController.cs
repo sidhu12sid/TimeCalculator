@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TimeCalculator.Interfaces;
 using TimeCalculator.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,14 +10,22 @@ namespace TimeCalculator.Controllers
     [ApiController]
     public class PunchController : ControllerBase
     {
-        [HttpPost("calculate")]
-        public IActionResult Calculate([FromBody] List<PunchModel> punchTimes)
+        private readonly IPunchService _punchService;
+        public PunchController(IPunchService punchService)
         {
-            if (punchTimes == null || !punchTimes.Any())
+            _punchService = punchService;
+        }
+
+        [HttpPost("calculate")]
+        public IActionResult Calculate([FromQuery] string punchData)
+        {
+            if (punchData == null || !punchData.Any())
             {
                 return BadRequest("No punch times provided.");
             }
           
+            var punchTimes  = _punchService.CreatePunchData(punchData);
+
             TimeSpan totalWorked = TimeSpan.Zero;
             foreach (var punchTime in punchTimes)
             {
@@ -41,9 +50,15 @@ namespace TimeCalculator.Controllers
             
             var result = new
             {
-                TotalTimeWorked = totalWorked,
-                RemainingTime = remainingTime,
-                CompletionTime = completionTime.ToString("hh:mm:ss tt")
+                error = false,
+                status = true,
+                message = "Punchin time",
+                data = new
+                {
+                    TotalTimeWorked = totalWorked,
+                    RemainingTime = remainingTime,
+                    CompletionTime = completionTime.ToString("hh:mm:ss tt")
+                }
             };
 
             return Ok(result);

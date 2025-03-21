@@ -1,4 +1,7 @@
 
+using TimeCalculator.Interfaces;
+using TimeCalculator.Services;
+
 namespace TimeCalculator
 {
     public class Program
@@ -6,6 +9,8 @@ namespace TimeCalculator
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            
 
             // Add services to the container.
 
@@ -15,6 +20,7 @@ namespace TimeCalculator
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddTransient<IPunchService, PunchService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

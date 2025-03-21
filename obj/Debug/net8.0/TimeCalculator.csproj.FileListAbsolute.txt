@@ -34,3 +34,4 @@ D:\Dumb files\TimeCalculator\obj\Debug\net8.0\refint\TimeCalculator.dll
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\TimeCalculator.pdb
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\TimeCalculator.genruntimeconfig.cache
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\ref\TimeCalculator.dll
+D:\Dumb files\TimeCalculator\obj\Debug\net8.0\TimeCalculator.sourcelink.json
