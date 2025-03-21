@@ -31,12 +31,12 @@ namespace TimeCalculator.Controllers
             {
                 if (punchTime.PunchOut.HasValue)
                 {
-                    totalWorked += punchTime.PunchOut.Value - punchTime.PunchIn;
+                    totalWorked += punchTime.PunchOut.Value.ToUniversalTime() - punchTime.PunchIn.ToUniversalTime();
                 }
                 else
                 {
                    
-                    totalWorked += DateTime.Now - punchTime.PunchIn;
+                    totalWorked += DateTime.UtcNow - punchTime.PunchIn.ToUniversalTime();
                 }
             }
 
@@ -45,9 +45,8 @@ namespace TimeCalculator.Controllers
             TimeSpan remainingTime = targetWorkTime - totalWorked;
 
             
-            DateTime completionTime = DateTime.Now.Add(remainingTime);
+            DateTime completionTime = DateTime.UtcNow.Add(remainingTime);
 
-            
             var result = new
             {
                 error = false,

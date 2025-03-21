@@ -20,6 +20,7 @@ D:\Dumb files\TimeCalculator\obj\Debug\net8.0\TimeCalculator.AssemblyInfo.cs
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\TimeCalculator.csproj.CoreCompileInputs.cache
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\TimeCalculator.MvcApplicationPartsAssemblyInfo.cs
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\TimeCalculator.MvcApplicationPartsAssemblyInfo.cache
+D:\Dumb files\TimeCalculator\obj\Debug\net8.0\TimeCalculator.sourcelink.json
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\staticwebassets.build.json
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\staticwebassets.development.json
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\staticwebassets\msbuild.TimeCalculator.Microsoft.AspNetCore.StaticWebAssets.props
@@ -34,4 +35,3 @@ D:\Dumb files\TimeCalculator\obj\Debug\net8.0\refint\TimeCalculator.dll
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\TimeCalculator.pdb
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\TimeCalculator.genruntimeconfig.cache
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\ref\TimeCalculator.dll
-D:\Dumb files\TimeCalculator\obj\Debug\net8.0\TimeCalculator.sourcelink.json
