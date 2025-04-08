@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TimeCalculator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+32a038cbeee68b9626458b101d7c09997a3b62fb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+86f89ca5e40b9f84b354f97ead084e7b13d11c2a")]
 [assembly: System.Reflection.AssemblyProductAttribute("TimeCalculator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TimeCalculator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
