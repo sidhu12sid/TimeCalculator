@@ -25,8 +25,14 @@ namespace TimeCalculator.Controllers
             }
           
             var punchTimes  = _punchService.CreatePunchData(punchData);
+            TimeSpan targetWorkTime = TimeSpan.FromHours(8);
 
             TimeSpan totalWorked = TimeSpan.Zero;
+
+            //TimeSpan totalWorkDone = TimeSpan.Zero;
+
+            TimeSpan overTime = TimeSpan.Zero;
+
             foreach (var punchTime in punchTimes)
             {
                 if (punchTime.PunchOut.HasValue)
@@ -35,28 +41,43 @@ namespace TimeCalculator.Controllers
                 }
                 else
                 {
-                   
-                    totalWorked += DateTime.Now - punchTime.PunchIn;
+                    if(totalWorked.TotalHours < 8)
+                    {
+                        totalWorked += DateTime.Now - punchTime.PunchIn;
+                    }
+                    else
+                    {
+                       totalWorked = totalWorked + TimeSpan.Zero;
+                       overTime = DateTime.Now - punchTime.PunchIn;
+                    }
+                    
                 }
             }
 
             var lastPunchOut = punchTimes[punchTimes.Count - 1].PunchOut;
-
+            var lastPunchIn = punchTimes[punchTimes.Count - 1].PunchIn;
             string? output = null;
 
-            TimeSpan targetWorkTime = TimeSpan.FromHours(8);
+          
 
             if(totalWorked >= targetWorkTime && lastPunchOut != null)
             {
                 var workDifference = totalWorked - targetWorkTime;              
                 var completedTime = Convert.ToDateTime(lastPunchOut) - workDifference;
-                output = $"You have completed 8 hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")} and you have {Math.Round(workDifference.TotalMinutes, 2)} minutes as extra time";
+                output = $"You have completed 8 hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")} and you have {workDifference.Hours} Hours ,{workDifference.Minutes} Minutes and {workDifference.Seconds} Seconds as extra time";
             }
+            else if(totalWorked > targetWorkTime && lastPunchOut == null)
+            {
+                var workDifference = totalWorked - targetWorkTime;
+                var completedTime = Convert.ToDateTime(lastPunchIn) - workDifference;
+                output = $"You have completed 8 hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")} and you have {overTime.Days} Days,{overTime.Hours} Hours,{overTime.Minutes} Minutes and {overTime.Seconds} Seconds as overTime";
+            }
+
             else if(totalWorked <= targetWorkTime && lastPunchOut != null)
             {
                 var workDifference = targetWorkTime - totalWorked;
                 var completedTime = Convert.ToDateTime(lastPunchOut) + workDifference;
-                output = $"You are {Math.Round(workDifference.TotalMinutes, 2)} minutes deficit for attaining 8 hours You could have been attain 8 hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")}";
+                output = $"You are {workDifference.Hours} Hours ,{workDifference.Minutes} Minutes and {workDifference.Seconds} Seconds deficit for attaining 8 hours You could have been attain 8 hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")}";
             }
             else if(lastPunchOut == null)
             {
@@ -64,9 +85,10 @@ namespace TimeCalculator.Controllers
                 DateTime completionTime = DateTime.Now.Add(remainingTime);
                 output = $"You will attain 8 hours at {completionTime.ToString("dd-MM-yyyy hh:mm:ss tt")}";
             }
+            
               
 
-            
+          
             var result = new
             {
                 error = false,
