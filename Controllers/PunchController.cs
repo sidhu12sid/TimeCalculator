@@ -29,8 +29,6 @@ namespace TimeCalculator.Controllers
 
             TimeSpan totalWorked = TimeSpan.Zero;
 
-            //TimeSpan totalWorkDone = TimeSpan.Zero;
-
             TimeSpan overTime = TimeSpan.Zero;
 
             foreach (var punchTime in punchTimes)
@@ -85,10 +83,7 @@ namespace TimeCalculator.Controllers
                 DateTime completionTime = DateTime.Now.Add(remainingTime);
                 output = $"You will attain 8 hours at {completionTime.ToString("dd-MM-yyyy hh:mm:ss tt")}";
             }
-            
-              
 
-          
             var result = new
             {
                 error = false,

@@ -7,8 +7,6 @@ namespace TimeCalculator.Services
 {
     public class PunchService : IPunchService
     {
-
-
         public List<PunchModel> CreatePunchData(string input)
         {
             List<PunchModel> punchData = new List<PunchModel>();
