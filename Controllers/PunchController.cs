@@ -23,7 +23,7 @@ namespace TimeCalculator.Controllers
             {
                 return BadRequest("No punch times provided.");
             }
-          
+            
             var punchTimes  = _punchService.CreatePunchData(punchData);
             TimeSpan targetWorkTime = TimeSpan.FromHours(8);
 

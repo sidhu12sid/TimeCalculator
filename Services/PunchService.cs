@@ -15,7 +15,8 @@ namespace TimeCalculator.Services
                 string[] lines = input.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string line in lines)
                 {
-                    string[] parts = line.Split('\t');
+                    var l = line.Trim();
+                    string[] parts = l.Split('\t');
                     if (parts.Length < 2) continue;
 
                     DateTime punchIn = DateTime.ParseExact($"{parts[0]} {parts[1]}", "dd-MMM-yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
