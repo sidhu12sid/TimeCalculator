@@ -51,6 +51,7 @@ namespace TimeCalculator.Controllers
                     
                 }
             }
+            totalWorked = new TimeSpan(totalWorked.Hours, totalWorked.Minutes, totalWorked.Seconds);
 
             var lastPunchOut = punchTimes[punchTimes.Count - 1].PunchOut;
             var lastPunchIn = punchTimes[punchTimes.Count - 1].PunchIn;
@@ -62,20 +63,20 @@ namespace TimeCalculator.Controllers
             {
                 var workDifference = totalWorked - targetWorkTime;              
                 var completedTime = Convert.ToDateTime(lastPunchOut) - workDifference;
-                output = $"You have completed 8 hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")} and you have {workDifference.Hours} Hours ,{workDifference.Minutes} Minutes and {workDifference.Seconds} Seconds as extra time";
+                output = $"You have completed 8 hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")}. \n\n You have {workDifference.Hours} Hours ,{workDifference.Minutes} Minutes and {workDifference.Seconds} Seconds as extra time";
             }
             else if(totalWorked > targetWorkTime && lastPunchOut == null)
             {
                 var workDifference = totalWorked - targetWorkTime;
                 var completedTime = Convert.ToDateTime(lastPunchIn) - workDifference;
-                output = $"You have completed 8 hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")} and you have {overTime.Days} Days,{overTime.Hours} Hours,{overTime.Minutes} Minutes and {overTime.Seconds} Seconds as overTime";
+                output = $"You have completed 8 hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")}.\n\n You have {overTime.Days} Days,{overTime.Hours} Hours,{overTime.Minutes} Minutes and {overTime.Seconds} Seconds as overTime";
             }
 
             else if(totalWorked <= targetWorkTime && lastPunchOut != null)
             {
                 var workDifference = targetWorkTime - totalWorked;
                 var completedTime = Convert.ToDateTime(lastPunchOut) + workDifference;
-                output = $"You are {workDifference.Hours} Hours ,{workDifference.Minutes} Minutes and {workDifference.Seconds} Seconds deficit for attaining 8 hours You could have been attain 8 hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")}";
+                output = $"You are {workDifference.Hours} Hours ,{workDifference.Minutes} Minutes and {workDifference.Seconds} Seconds deficit for attaining 8 hours. \n\n You could have been attain 8 hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")}";
             }
             else if(lastPunchOut == null)
             {
