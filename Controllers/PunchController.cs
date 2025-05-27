@@ -184,7 +184,9 @@ namespace TimeCalculator.Controllers
                         message = "Punchin time",
                         data = new
                         {
-                            CompletionTime = output
+                            CompletionTime = output,
+                            TotalWorked = totalWorked,
+                            TargetWorkTime = targetWorkTime
                         }
                     });
                 }
