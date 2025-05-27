@@ -5,6 +5,10 @@ D:\Dumb files\TimeCalculator\bin\Debug\net8.0\TimeCalculator.deps.json
 D:\Dumb files\TimeCalculator\bin\Debug\net8.0\TimeCalculator.runtimeconfig.json
 D:\Dumb files\TimeCalculator\bin\Debug\net8.0\TimeCalculator.dll
 D:\Dumb files\TimeCalculator\bin\Debug\net8.0\TimeCalculator.pdb
+D:\Dumb files\TimeCalculator\bin\Debug\net8.0\Asp.Versioning.Abstractions.dll
+D:\Dumb files\TimeCalculator\bin\Debug\net8.0\Asp.Versioning.Http.dll
+D:\Dumb files\TimeCalculator\bin\Debug\net8.0\Asp.Versioning.Mvc.dll
+D:\Dumb files\TimeCalculator\bin\Debug\net8.0\Asp.Versioning.Mvc.ApiExplorer.dll
 D:\Dumb files\TimeCalculator\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
 D:\Dumb files\TimeCalculator\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 D:\Dumb files\TimeCalculator\bin\Debug\net8.0\Microsoft.OpenApi.dll
