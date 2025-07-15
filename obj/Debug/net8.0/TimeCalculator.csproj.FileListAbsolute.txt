@@ -17,6 +17,7 @@ D:\Dumb files\TimeCalculator\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
 D:\Dumb files\TimeCalculator\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\Dumb files\TimeCalculator\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Dumb files\TimeCalculator\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Dumb files\TimeCalculator\bin\Debug\net8.0\TimeZoneConverter.dll
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\TimeCalculator.csproj.AssemblyReference.cache
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\TimeCalculator.GeneratedMSBuildEditorConfig.editorconfig
 D:\Dumb files\TimeCalculator\obj\Debug\net8.0\TimeCalculator.AssemblyInfoInputs.cache

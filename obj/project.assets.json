@@ -247,6 +247,19 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "TimeZoneConverter/7.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/TimeZoneConverter.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/TimeZoneConverter.dll": {
+            "related": ".xml"
+          }
+        }
       }
     }
   },
@@ -831,13 +844,36 @@
         "swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "TimeZoneConverter/7.0.0": {
+      "sha512": "sFbY65N/5GdsHx7nkdHFHUG+5Ar4W0w6Aks7Y2X+Q4NOTw6XyX2Il7jm+4tPkc//4mA3nG0RdxI8gKgoJitdLw==",
+      "type": "package",
+      "path": "timezoneconverter/7.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net462/TimeZoneConverter.dll",
+        "lib/net462/TimeZoneConverter.xml",
+        "lib/net6.0/TimeZoneConverter.dll",
+        "lib/net6.0/TimeZoneConverter.xml",
+        "lib/net8.0/TimeZoneConverter.dll",
+        "lib/net8.0/TimeZoneConverter.xml",
+        "lib/net9.0/TimeZoneConverter.dll",
+        "lib/net9.0/TimeZoneConverter.xml",
+        "lib/netstandard2.0/TimeZoneConverter.dll",
+        "lib/netstandard2.0/TimeZoneConverter.xml",
+        "timezoneconverter.7.0.0.nupkg.sha512",
+        "timezoneconverter.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Asp.Versioning.Mvc.ApiExplorer >= 8.1.0",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 8.0.14",
-      "Swashbuckle.AspNetCore >= 6.4.0"
+      "Swashbuckle.AspNetCore >= 6.4.0",
+      "TimeZoneConverter >= 7.0.0"
     ]
   },
   "packageFolders": {
@@ -894,6 +930,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.4.0, )"
+          },
+          "TimeZoneConverter": {
+            "target": "Package",
+            "version": "[7.0.0, )"
           }
         },
         "imports": [

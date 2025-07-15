@@ -101,109 +101,97 @@ namespace TimeCalculator.Controllers
         {
             try
             {
-                if (punchData == null || !punchData.Any())
+                if (string.IsNullOrWhiteSpace(punchData))
                 {
                     return BadRequest(new
                     {
                         error = true,
                         status = false,
-                        message = "PunchData cannot be null",
-                        data = new
-                        {
-
-                        }
+                        message = "PunchData cannot be null or empty",
+                        data = new { }
                     });
                 }
-                else
+
+                var punchTimes = _punchService.CreatePunchData(punchData);
+                TimeSpan targetWorkTime = dayType == 1 ? TimeSpan.FromHours(4) : TimeSpan.FromHours(8);
+                
+
+                TimeSpan totalWorked = TimeSpan.Zero;
+
+                foreach (var punchTime in punchTimes)
                 {
-                    var punchTimes = _punchService.CreatePunchData(punchData);
-                    TimeSpan targetWorkTime = dayType ==1 ? TimeSpan.FromHours(4) : TimeSpan.FromHours(8);
-
-                    TimeSpan totalWorked = TimeSpan.Zero;
-                    
-                    int workHoursNeeded = dayType == 1 ? 4 : 8;
-
-                    foreach (var punchTime in punchTimes)
+                    if (punchTime.PunchOut.HasValue)
                     {
-                        if (punchTime.PunchOut.HasValue)
+                        totalWorked += punchTime.PunchOut.Value.Subtract(punchTime.PunchIn);
+                    }
+                    else
+                    {
+                        if (totalWorked.Hours < targetWorkTime.Hours)
                         {
-                            totalWorked += punchTime.PunchOut.Value.Subtract(punchTime.PunchIn);
+                            totalWorked += _punchService.GetIndianTime().Subtract(punchTime.PunchIn);
                         }
                         else
                         {
-                            if (totalWorked.Hours < workHoursNeeded)
-                            {
-                                totalWorked += DateTime.Now.Subtract(punchTime.PunchIn);
-                            }
-                            else
-                            {
-                                totalWorked = totalWorked + TimeSpan.Zero;                              
-                            }
-
+                            totalWorked = totalWorked + TimeSpan.Zero;
                         }
                     }
-                    totalWorked = new TimeSpan(totalWorked.Hours, totalWorked.Minutes, totalWorked.Seconds);
-
-                    var lastPunchOut = punchTimes[punchTimes.Count - 1].PunchOut;
-                    var lastPunchIn = punchTimes[punchTimes.Count - 1].PunchIn;
-                    string? output = null;
-
-
-
-                    if (totalWorked >= targetWorkTime && lastPunchOut != null)
-                    {
-                        var workDifference = totalWorked - targetWorkTime;
-                        var completedTime = Convert.ToDateTime(lastPunchOut).Subtract(workDifference);
-                        output = $"You have completed {workHoursNeeded} hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")}. \n\n You have {workDifference.Hours} Hours ,{workDifference.Minutes} Minutes and {workDifference.Seconds} Seconds as extra time";
-                    }
-                    else if (totalWorked > targetWorkTime && lastPunchOut == null)
-                    {
-                        var workDifference = totalWorked - targetWorkTime;
-                        var completedTime = DateTime.Now.Subtract(workDifference);
-                        output = $"You have completed {workHoursNeeded} hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")}.\n\n You have {workDifference.Days} Days,{workDifference.Hours} Hours,{workDifference.Minutes} Minutes and {workDifference.Seconds} Seconds as overTime";
-
-                    }
-
-                    else if (totalWorked <= targetWorkTime && lastPunchOut != null)
-                    {
-                        var workDifference = targetWorkTime - totalWorked;
-                        var completedTime = Convert.ToDateTime(lastPunchOut).Add(workDifference);
-                        output = $"You are {workDifference.Hours} Hours ,{workDifference.Minutes} Minutes and {workDifference.Seconds} Seconds deficit for attaining {workHoursNeeded} hours. \n\n You could have been attain 8 hours at {completedTime.ToString("dd-MM-yyyy hh:mm:ss tt")}";
-                    }
-                    else if (lastPunchOut == null)
-                    {
-                        TimeSpan remainingTime = targetWorkTime - totalWorked;
-                        DateTime completionTime = DateTime.Now.Add(remainingTime);
-                        output = $"You will attain {workHoursNeeded} hours at {completionTime.ToString("dd-MM-yyyy hh:mm:ss tt")}";
-                    }
-
-                    return Ok(new
-                    {
-                        error = false,
-                        status = true,
-                        message = "Punchin time",
-                        data = new
-                        {
-                            CompletionTime = output,
-                            TotalWorked = totalWorked,
-                            TargetWorkTime = targetWorkTime
-                        }
-                    });
                 }
+
+                var lastPunchOut = punchTimes[punchTimes.Count - 1].PunchOut;
+                var lastPunchIn = punchTimes[punchTimes.Count - 1].PunchIn;
+                string? output = null;
+
+                if (totalWorked.TotalSeconds >= targetWorkTime.TotalSeconds && lastPunchOut != null)
+                {
+                    var workDifference = totalWorked - targetWorkTime;
+                    var completedTime = Convert.ToDateTime(lastPunchOut).Subtract(workDifference);
+                    output = $"You have completed {targetWorkTime.Hours} hours at {completedTime:dd-MM-yyyy hh:mm:ss tt}. \n\nYou have {workDifference.Hours} Hours, {workDifference.Minutes} Minutes and {workDifference.Seconds} Seconds as extra time";
+                }
+                else if (totalWorked.TotalSeconds > targetWorkTime.TotalSeconds && lastPunchOut == null)
+                {
+                    var workDifference = totalWorked - targetWorkTime;
+                    var completedTime = _punchService.GetIndianTime().Subtract(workDifference);
+                    output = $"You have completed {targetWorkTime.Hours} hours at {completedTime:dd-MM-yyyy hh:mm:ss tt}. \n\nYou have {workDifference.Days} Days, {workDifference.Hours} Hours, {workDifference.Minutes} Minutes and {workDifference.Seconds} Seconds as overTime";
+                }
+                else if (totalWorked.TotalSeconds <= targetWorkTime.TotalSeconds && lastPunchOut != null)
+                {
+                    var workDifference = targetWorkTime - totalWorked;
+                    var completedTime = Convert.ToDateTime(lastPunchOut).Add(workDifference);
+                    output = $"You are {workDifference.Hours} Hours, {workDifference.Minutes} Minutes and {workDifference.Seconds} Seconds short of attaining {targetWorkTime.Hours} hours. \n\nYou could have attained it at {completedTime:dd-MM-yyyy hh:mm:ss tt}";
+                }
+                else if (lastPunchOut == null)
+                {
+                    TimeSpan remainingTime = targetWorkTime - totalWorked;
+                    DateTime completionTime = _punchService.GetIndianTime().Add(remainingTime);
+                    output = $"You will attain {targetWorkTime.Hours} hours at {completionTime:dd-MM-yyyy hh:mm:ss tt}";
+                }
+
+                return Ok(new
+                {
+                    error = false,
+                    status = true,
+                    message = "Punch-in time",
+                    data = new
+                    {
+                        CompletionTime = output,
+                        TotalWorked = totalWorked,
+                        TargetWorkTime = targetWorkTime,
+                        ServerTime = DateTime.Now.ToString("dd-MM-yyyy hh:mm:ss tt"),
+                        IndianTime = _punchService.GetIndianTime().ToString("dd-MM-yyyy hh:mm:ss tt")
+                    }
+                });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(new
                 {
                     error = true,
                     status = false,
                     message = ex.Message,
-                    data = new
-                    {
-                        
-                    }
+                    data = new { }
                 });
             }
         }
+
     }
 }

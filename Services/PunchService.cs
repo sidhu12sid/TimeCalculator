@@ -2,6 +2,7 @@
 using System.Globalization;
 using TimeCalculator.Interfaces;
 using TimeCalculator.Models;
+using TimeZoneConverter;
 
 namespace TimeCalculator.Services
 {
@@ -30,12 +31,19 @@ namespace TimeCalculator.Services
                     punchData.Add(new PunchModel { PunchIn = punchIn, PunchOut = punchOut });
                 }
             }
-            catch 
+            catch
             {
                 return null;
             }
             return punchData;
         }
+
+        public DateTime GetIndianTime()
+        {
+            TimeZoneInfo istZone = TZConvert.GetTimeZoneInfo("India Standard Time");
+            return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, istZone);
+        }
+
 
     }
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "H0toM2A6LItW8VJ+50QPafFXafidty010vLjPAtJbzgbCRN9RqnXyWS//66zBmqenGUOX4woAaQCnT8YRmHmBQ==",
+  "dgSpecHash": "+6YFIU4Hcy7dZQVtgrZ1eYJqGEUlC6ialNqrZF/IK0LY6CDzPw3N8bpIh8oAab036m/sdsa/OuW1yz+QJpdFUg==",
   "success": true,
   "projectFilePath": "D:\\Dumb files\\TimeCalculator\\TimeCalculator.csproj",
   "expectedPackageFiles": [
@@ -19,7 +19,8 @@
     "C:\\Users\\Sidharth\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\Sidharth\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\Sidharth\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
-    "C:\\Users\\Sidharth\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+    "C:\\Users\\Sidharth\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
+    "C:\\Users\\Sidharth\\.nuget\\packages\\timezoneconverter\\7.0.0\\timezoneconverter.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }
